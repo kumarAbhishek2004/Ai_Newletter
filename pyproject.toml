@@ -1,0 +1,16 @@
+[project]
+name = "newsletter-ai"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "arxiv>=2.0.0",
+    "fastmcp>=0.1.0",
+    "google-api-python-client>=2.100.0",
+    "google-auth>=2.23.0",
+    "google-auth-httplib2>=0.1.1",
+    "google-auth-oauthlib>=1.1.0",
+    "python-dotenv>=1.0.0",
+    "requests>=2.31.0",
+]
