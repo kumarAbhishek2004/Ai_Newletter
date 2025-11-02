@@ -51,11 +51,7 @@ This MCP server specifically provides Claude with tools to automate the entire A
 
 ---
 
-<div align="center">
-<img src="https://raw.githubusercontent.com/anthropics/anthropic-cookbook/main/misc/mcp_diagram.png" alt="MCP Architecture" width="600"/>
 
-*How MCP connects Claude with external services*
-</div>
 
 ---
 
