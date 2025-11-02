@@ -8,7 +8,7 @@
 
 **Automate your AI newsletter creation with intelligent research, curation, and publishing**
 
-[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Configuration](#-configuration)
+[Features](#-features) • [Installation](#-installation) • [Quick Start](#-quick-start-with-fastmcp-cloud) • [Usage](#-usage) • [Configuration](#-configuration)
 
 </div>
 
@@ -51,11 +51,46 @@ This MCP server specifically provides Claude with tools to automate the entire A
 
 ---
 
+## 🚀 Quick Start with FastMCP Cloud
 
+### Option 1: Use Our Hosted Server (Recommended)
+
+**No installation required!** Connect directly to our hosted MCP server:
+
+#### Step 1: Open Claude Desktop Configuration
+
+- **Mac**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+
+#### Step 2: Add This Configuration
+
+```json
+{
+  "mcpServers": {
+    "ai-newsletter": {
+      "url": "https://linguistic-chocolate-grouse.fastmcp.app/mcp"
+    }
+  }
+}
+```
+
+#### Step 3: Restart Claude Desktop
+
+Close and reopen Claude Desktop. The AI Newsletter tools will now be available!
+
+#### Step 4: Start Using It
+
+Open a conversation with Claude and try:
+
+```
+Help me research and create this week's AI newsletter
+```
+
+Claude will automatically use the newsletter tools to gather content, organize it, and create a draft for you!
 
 ---
 
-## 🚀 Installation
+## 🛠️ Local Installation (For Developers)
 
 ### Prerequisites
 - Python 3.8 or higher
@@ -64,13 +99,13 @@ This MCP server specifically provides Claude with tools to automate the entire A
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/kumarAbhishek2004/ai-newsletter-mcp.git
-cd ai-newsletter-mcp
+git clone https://github.com/kumarAbhishek2004/Ai_Newletter.git
+cd Ai_Newletter
 ```
 
 ### Step 2: Install Dependencies
 ```bash
-pip install fastmcp arxiv requests google-api-python-client google-auth-httplib2 google-auth-oauthlib python-dotenv
+pip install -r requirements.txt
 ```
 
 ### Step 3: Set Up Environment Variables
@@ -91,23 +126,49 @@ PRODUCT_HUNT_API_KEY=your_producthunt_key_here
 TWITTER_BEARER_TOKEN=your_twitter_token_here
 ```
 
-### Step 4: Run the Server
+### Step 4: Run the Server Locally
 ```bash
-python ai_newsletter_server.py
+python main.py
+```
+
+### Step 5: Configure Claude Desktop for Local Server
+```json
+{
+  "mcpServers": {
+    "ai-newsletter": {
+      "command": "python",
+      "args": ["/path/to/your/Ai_Newletter/main.py"]
+    }
+  }
+}
 ```
 
 ---
 
 ## 📋 Usage
 
-### Quick Start with Claude Desktop
+### Quick Start Workflow
 
-1. **Configure Claude Desktop** to use this MCP server
-2. **Start a conversation** with Claude
-3. **Use built-in prompts** to guide the workflow:
+Once connected, simply ask Claude:
 
+**For Complete Newsletter Creation:**
 ```
-Use the research_newsletter_prompt to gather this week's content
+Create this week's AI newsletter covering the latest papers, GitHub projects, and products
+```
+
+**For Specific Research:**
+```
+Search arXiv for papers about large language models from the past week
+```
+
+**For Organization:**
+```
+Organize my newsletter content into sections and prioritize the most important items
+```
+
+**For Publishing:**
+```
+Generate an HTML newsletter and save it to my Google Drive
 ```
 
 ### Available Tools
@@ -134,31 +195,25 @@ Use the research_newsletter_prompt to gather this week's content
 
 ### Example Workflow
 
-```python
-# 1. Gather research content
-research_data = fetch_all_research({
-    "days_back": 7,
-    "max_papers": 10
-})
+**Conversation with Claude:**
 
-# 2. Create draft
-draft = create_newsletter_draft(
-    research_content=research_data["research_data"],
-    issue_number=42
-)
+> **You:** "Help me create this week's AI newsletter"
 
-# 3. Validate content
-validation = validate_newsletter_content(draft["draft"])
+> **Claude:** *Uses fetch_all_research() to gather content from arXiv, GitHub, Product Hunt, etc.*
 
-# 4. Generate HTML
-html = generate_html_newsletter(draft["draft"])
+> **Claude:** "I've gathered 10 research papers, 8 trending repos, and 5 new products. Here's what I found..."
 
-# 5. Save to Drive
-result = save_to_drive(
-    content=html["html"],
-    filename="newsletter_issue_42.html"
-)
-```
+> **You:** "Great! Now organize this into sections and create a draft"
+
+> **Claude:** *Uses create_newsletter_draft() to organize content*
+
+> **Claude:** "I've created a draft with 5 sections. Would you like me to generate the HTML version?"
+
+> **You:** "Yes, and save it to Google Drive"
+
+> **Claude:** *Uses generate_html_newsletter() and save_to_drive()*
+
+> **Claude:** "Done! Your newsletter has been saved to Google Drive. Here's the preview..."
 
 ---
 
@@ -189,38 +244,13 @@ result = save_to_drive(
 
 ---
 
-## 🛠️ Advanced Features
-
-### Rate Limiting
-Built-in rate limiting prevents API abuse:
-- arXiv: 30 calls/minute
-- GitHub: 30 calls/minute
-- Product Hunt: 20 calls/minute
-- Twitter: 15 calls/minute
-
-### Error Handling
-All API calls are wrapped with:
-- Timeout protection
-- Retry logic
-- Graceful failure handling
-- Detailed error logging
-
-### Content Validation
-Automatic checks for:
-- Minimum content requirements
-- Missing sections
-- Empty fields
-- Proper formatting
-
----
-
 ## 📊 Sample Output
 
 ### Text Preview
 ```
 ============================================================
-CampusX AI Newsletter #42
-Issue #42 | November 02, 2025
+ AI Newsletter #4
+Issue #4| November 02, 2025
 ============================================================
 
 📊 CONTENT SUMMARY:
@@ -247,17 +277,6 @@ Breakthrough in Multi-Modal AI Reasoning
 
 ---
 
-## 🤝 Contributing
-
-Contributions are welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
----
 
 ## 📝 License
 
@@ -266,8 +285,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 ## 👥 Author
-
-
 
 <div align="center">
 <img src="./github_photo (1).png" alt="Kumar Abhishek" width="150" height="150" style="border-radius: 50%;" />
@@ -292,7 +309,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Email**: abhishek.kr0418@gmail.com
 - **GitHub**: [kumarAbhishek2004](https://github.com/kumarAbhishek2004)
 - **LinkedIn**: [kumar-abhishek-6b5828288](https://linkedin.com/in/kumar-abhishek-6b5828288)
-- **Issues**: [Report Bug](https://github.com/kumarAbhishek2004/ai-newsletter-mcp/issues)
+- **Issues**: [Report Bug](https://github.com/kumarAbhishek2004/Ai_Newletter/issues)
 
 ---
 
